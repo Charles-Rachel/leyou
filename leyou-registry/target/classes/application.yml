@@ -5,6 +5,7 @@ spring:
     name: leyou-registry
 eureka:
   client:
+    registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://127.0.0.1:${server.port}/eureka
     register-with-eureka: false # 把自己注册到eureka服务列表

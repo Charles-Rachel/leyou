@@ -8,6 +8,11 @@ eureka:
     registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+  eureka:
+    enabled: true
 zuul:
   ignored-services:
     - upload-service # 忽略upload-service服务

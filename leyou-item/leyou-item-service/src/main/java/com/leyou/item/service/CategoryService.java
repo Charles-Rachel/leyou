@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,5 +26,15 @@ public class CategoryService {
     }
     public List<Category> queryByBrandId(Long bid) {
         return this.categoryMapper.queryByBrandId(bid);
+    }
+
+    public List<String> queryNamesByIds(List<Long> ids) {
+        List<Category> list = this.categoryMapper.selectByIdList(ids);
+        List<String> names = new ArrayList<>();
+        for (Category category : list) {
+            names.add(category.getName());
+        }
+        return names;
+        // return list.stream().map(category -> category.getName()).collect(Collectors.toList());
     }
 }
