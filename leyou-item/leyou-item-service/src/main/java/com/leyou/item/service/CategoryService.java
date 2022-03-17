@@ -4,6 +4,7 @@ import com.leyou.item.mapper.CategoryMapper;
 import com.leyou.item.pojo.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class CategoryService {
     public List<Category> queryByBrandId(Long bid) {
         return this.categoryMapper.queryByBrandId(bid);
     }
-
+    @Transactional
     public List<String> queryNamesByIds(List<Long> ids) {
         List<Category> list = this.categoryMapper.selectByIdList(ids);
         List<String> names = new ArrayList<>();

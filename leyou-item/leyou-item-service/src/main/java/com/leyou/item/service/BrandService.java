@@ -74,7 +74,7 @@ public class BrandService {
             this.brandMapper.insertBrandAndCategory(cid, brand.getId());
         });
     }
-
+    @Transactional
     public void updateBrand(Brand brand, List<Long> cids) {
         //更新brand
         this.brandMapper.updateByPrimaryKey(brand);
@@ -89,5 +89,9 @@ public class BrandService {
         this.brandMapper.deleteByPrimaryKey(bid);
         //更新中间表
         this.brandMapper.deleteBrandAndCategory(bid);
+    }
+    public List<Brand> queryBrandsByCid(Long cid) {
+
+        return this.brandMapper.selectBrandByCid(cid);
     }
 }

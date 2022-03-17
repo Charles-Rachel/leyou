@@ -6,8 +6,10 @@ import com.leyou.item.pojo.SpecGroup;
 import com.leyou.item.pojo.SpecParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -18,16 +20,31 @@ public class SpecificationService {
     @Resource
     private SpecParamMapper paramMapper;
 
+//    /**
+//     * 根据条件查询规格参数
+//     * @param gid
+//     * @return
+//     */
+//    public List<SpecParam> queryParams(Long gid) {
+//        SpecParam param = new SpecParam();
+//        param.setGroupId(gid);
+//        return this.paramMapper.select(param);
+//    }
+
     /**
-     * 根据条件查询规格参数
+     * 根据gid查询规格参数
      * @param gid
      * @return
      */
-    public List<SpecParam> queryParams(Long gid) {
-        SpecParam param = new SpecParam();
-        param.setGroupId(gid);
-        return this.paramMapper.select(param);
+    public List<SpecParam> queryParams(Long gid, Long cid, Boolean generic, Boolean searching) {
+        SpecParam record = new SpecParam();
+        record.setGroupId(gid);
+        record.setCid(cid);
+        record.setGeneric(generic);
+        record.setSearching(searching);
+        return this.paramMapper.select(record);
     }
+
     /**
      * 根据分类id查询分组
      * @param cid
@@ -46,9 +63,10 @@ public class SpecificationService {
     public void addGroupsById(SpecGroup specGroup) {
         this.groupMapper.updateByPrimaryKey(specGroup);
     }
-
+    @Transactional
     public void deleteGroupsById(Long id) {
         this.groupMapper.deleteByPrimaryKey(id);
+        this.paramMapper.deleteByGroupId(id);
     }
 
     public void addParamByCid(SpecParam specParam) {

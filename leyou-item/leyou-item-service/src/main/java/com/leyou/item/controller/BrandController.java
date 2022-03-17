@@ -64,4 +64,12 @@ public class BrandController {
         this.brandService.delBrand(bid);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @GetMapping("cid/{cid}")
+    public ResponseEntity<List<Brand>> queryBrandsByCid(@PathVariable("cid")Long cid){
+        List<Brand> brands = this.brandService.queryBrandsByCid(cid);
+        if (CollectionUtils.isEmpty(brands)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(brands);
+    }
 }
