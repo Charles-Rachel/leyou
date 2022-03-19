@@ -2,6 +2,7 @@ package com.leyou.item.controller;
 
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.pojo.Sku;
+import com.leyou.item.pojo.SpecParam;
 import com.leyou.item.pojo.SpuBo;
 import com.leyou.item.pojo.SpuDetail;
 import com.leyou.item.service.GoodsService;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
+//@RestController
 public class GoodsController {
 
     @Autowired
@@ -59,4 +62,28 @@ public class GoodsController {
         this.goodsService.updateGoods(spuBo);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+//    @GetMapping("goods/spu/page")
+//    public PageResult<SpuBo>  querySpuByPage(
+//            @RequestParam(value = "key", required = false) String key,
+//            @RequestParam(value = "saleable", defaultValue = "true") Boolean saleable,
+//
+//                @RequestParam(value = "page", defaultValue = "1") Integer page,
+//            @RequestParam(value = "rows", defaultValue = "5") Integer rows
+//    ){
+//        PageResult<SpuBo> names = this.goodsService.querySpuBoByPage(key,saleable,page,rows);
+//        return names;
+//    }
+//    @GetMapping("goods/sku/list")
+//    public ResponseEntity<List<Sku>>   querySkuBySpuId(@RequestParam("id") Long id){
+//        List<Sku> names=this.goodsService.querySkusBySpuId(id);
+//        if (CollectionUtils.isEmpty(names)) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        return ResponseEntity.ok(names);
+//    }
+//    @GetMapping("goods/spu/detail/{id}")
+//    public ResponseEntity<SpuDetail> querySpuDetailById(@PathVariable("id") Long id) {
+//        SpuDetail names=this.goodsService.querySpuDetailBySpuId(id);
+//        return ResponseEntity.ok(names);
+//    }
 }
